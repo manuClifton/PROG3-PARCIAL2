@@ -34,11 +34,11 @@ class UsuarioController{
 
             }else{
                 if(strlen($_POST['clave']) >= 4){
-                    if($parserBody['tipo'] == 1 || $parserBody['tipo'] == 2 || $parserBody['tipo'] == 3){
+                    if($parserBody['tipo'] == "admin" || $parserBody['tipo'] == "profesor" || $parserBody['tipo'] == "alumno"){
 
                         $existEmail =  User::where('email', trim($parserBody['email']))->first();
                         $existNombre =  User::where('nombre', trim($parserBody['nombre']))->first();
-                        $lastLegajo = User::orderBy('legajo', 'DESC')->first()['legajo'];
+                        //$lastLegajo = User::orderBy('legajo', 'DESC')->first()['legajo'];
     
     
                         if(empty($existEmail) && empty($existNombre)){ // si no existe
@@ -46,13 +46,13 @@ class UsuarioController{
                             //$user->clave = password_hash($parserBody['clave'], PASSWORD_BCRYPT);
                             //despues usar pass:verify
                             $user->clave = $parserBody['clave'];
-                            $user->tipo_id = $parserBody['tipo'];
+                            $user->tipo = $parserBody['tipo'];
                             $user->nombre = trim(strtolower($parserBody['nombre']));
-                            if(!$lastLegajo){
+                           /* if(!$lastLegajo){
                                 $user->legajo = 1000;
                             }else{
                                 $user->legajo = $lastLegajo + 100;
-                            }
+                            }*/
                         
                             try {
                                 $user->save();

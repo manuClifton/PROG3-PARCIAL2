@@ -12,7 +12,7 @@ class AuthMiddleware {
 
     public $roles;
 
-    public function __construct( $role1,  $role2 = '',  $role3='')
+    public function __construct(string $role1, string $role2 = '', string $role3='')
     {
         $this->roles = array();
         array_push($this->roles, $role1,$role2,$role3);

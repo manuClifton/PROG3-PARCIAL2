@@ -15,6 +15,7 @@ use Config\Database;
 use App\Controllers\UsuarioController;
 use App\Controllers\LoginController;
 use App\Controllers\MateriaController;
+use App\Controllers\InscripcionController;
 use App\Middlewares\JsonMiddleware;
 use App\Middlewares\AuthMiddleware;
 
@@ -30,7 +31,7 @@ $app->setBasePath('/PROG3-PARCIAL2/public');
 $app->group('/users', function (RouteCollectorProxy $group) {
     $group->get('[/]', UsuarioController::class.":getAll");
     $group->post('[/]', UsuarioController::class.":addOne");
-    $group->post('/{legajo}', UsuarioController::class.":updateOne")->add(new AuthMiddleware(1,2,3));
+    $group->post('/{legajo}', UsuarioController::class.":updateOne")->add(new AuthMiddleware("admin","profesor","alumno"));
 })
 ->add(new JsonMiddleware);
 
@@ -39,9 +40,15 @@ $app->group('/login', function (RouteCollectorProxy $group) {
 })
 ->add(new JsonMiddleware);
 
-$app->group('/materias', function (RouteCollectorProxy $group) {
-    $group->get('[/]', MateriaController::class.":getAll")->add(new AuthMiddleware(1,2,3));
-    $group->post('[/]', MateriaController::class.":addOne")->add(new AuthMiddleware(1))->add(new JsonMiddleware);
+$app->group('/materia', function (RouteCollectorProxy $group) {
+    $group->get('[/]', MateriaController::class.":getAll");
+    $group->post('[/]', MateriaController::class.":addOne")->add(new AuthMiddleware("admin"))->add(new JsonMiddleware);
+})
+->add(new JsonMiddleware);
+
+$app->group('/inscripcion', function (RouteCollectorProxy $group) {
+    $group->get('/{idMateria}', InscripcionController::class.":getAll")->add(new AuthMiddleware("admin","profesor"));
+    $group->post('/{idMateria}', InscripcionController::class.":addOne")->add(new AuthMiddleware("alumno"))->add(new JsonMiddleware);
 })
 ->add(new JsonMiddleware);
 

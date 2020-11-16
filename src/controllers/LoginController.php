@@ -36,8 +36,7 @@ class LoginController{
                 "id" => $usuario->id,
                 "email" => $usuario->email,
                 "nombre" => $usuario->nombre,
-                "tipo" => $usuario->tipo_id,
-                "legajo" => $usuario->legajo
+                "tipo" => $usuario->tipo
             );
             $jwt = JWT::encode($payload,$Key);
 

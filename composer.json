@@ -1,5 +1,6 @@
 {
     "name": "manuelclifton/prog3-parcial2",
+    "description": "",
     "authors": [
         {
             "name": "Manuel Clifton",
@@ -12,5 +13,11 @@
         "illuminate/database": "^8.14",
         "illuminate/events": "^8.14",
         "firebase/php-jwt": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Config\\":"config/",
+            "App\\":"src/"
+        }
     }
 }

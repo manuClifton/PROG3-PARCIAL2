@@ -1,0 +1,16 @@
+{
+    "name": "manuelclifton/prog3-parcial2",
+    "authors": [
+        {
+            "name": "Manuel Clifton",
+            "email": "manuclifton@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.2",
+        "illuminate/database": "^8.14",
+        "illuminate/events": "^8.14",
+        "firebase/php-jwt": "^5.2"
+    }
+}
